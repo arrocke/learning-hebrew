@@ -25,11 +25,12 @@ export default function ResourcesPage() {
                 <th className="px-2 border">Name</th>
                 <th className="px-2 border">URL</th>
                 <th className="px-2 border">Resource Type</th>
+                <th className="px-2 border"></th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td colSpan={3} className="px-2 border">
+                <td colSpan={4} className="px-2 border">
                   <Link href="/resources/new">
                     <a className="text-blue-600 hover:underline focus:underline">
                       + Add Resource
@@ -47,6 +48,11 @@ export default function ResourcesPage() {
                       </a>
                     </td>
                     <td className="px-2 border">{resource.resourceType}</td>
+                    <td className="px-2 border">
+                      <Link href={`/resources/${resource.id}/edit`}>
+                        <a className="text-blue-600 hover:underline focus:underline">Edit</a>
+                      </Link>
+                    </td>
                   </tr>
                 ))
               }
