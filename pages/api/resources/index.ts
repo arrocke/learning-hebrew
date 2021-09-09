@@ -26,7 +26,7 @@ export default async function(req: NextApiRequest, res: NextApiResponse) {
       break
     }
     case 'POST': {
-      const resource = await Resource.create(req.body)
+      const resource = await Resource.create(JSON.parse(req.body))
       res.setHeader('LOCATION', `${req.url}/${resource._id}`)
       res.status(201).end('Created')
       break
