@@ -1,5 +1,12 @@
 import * as Mongoose from "mongoose";
 
+export interface LearningPlanDocument extends Mongoose.Document {
+  resources: {
+    resource: Mongoose.Types.ObjectId,
+    status: string
+  }[]
+}
+
 const LearningPlanSchema = new Mongoose.Schema({
   resources: [{
     _id: false,
@@ -11,4 +18,6 @@ const LearningPlanSchema = new Mongoose.Schema({
   }]
 })
 
-export default Mongoose.models.LearningPlan ?? Mongoose.model('LearningPlan', LearningPlanSchema)
+export default Mongoose.modelNames().includes('LearningPlan')
+  ? Mongoose.model<LearningPlanDocument>('LearningPlan')
+  : Mongoose.model<LearningPlanDocument>('LearningPlan', LearningPlanSchema)
