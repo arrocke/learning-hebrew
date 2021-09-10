@@ -1,8 +1,10 @@
 import * as React from 'react'
+import { useRouter } from 'next/dist/client/router'
 import { useMutation } from 'react-query'
 import ResourceType from '../../types/ResourceType'
 
 export default function NewResourcePage() {
+  const router = useRouter()
   const { mutate } = useMutation((resource: { name: string, url: string, resourceType: ResourceType }) => {
     return fetch(
       `/api/resources`,
@@ -11,6 +13,10 @@ export default function NewResourcePage() {
         body: JSON.stringify(resource)
       }
     )
+  }, {
+    onSuccess() {
+      router.push(`/resources`)
+    }
   })
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {

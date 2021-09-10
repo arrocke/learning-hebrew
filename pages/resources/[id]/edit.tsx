@@ -27,6 +27,10 @@ export default function EditResourcePage() {
         body: JSON.stringify(data)
       }
     )
+  }, {
+    onSuccess() {
+      router.push(`/resources`)
+    }
   })
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
