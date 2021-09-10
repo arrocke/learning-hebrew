@@ -9,9 +9,11 @@ export default function EditResourcePage() {
   const [state, setState] = React.useState<any>({})
 
   const { status, data } = useQuery(['resources', router.query.id], async ({ queryKey }) => {
-    const request = await fetch(`/api/resources/${queryKey[1]}`)
-    const body = await request.json() as GetResourceResponseDTO
-    return body
+    if (queryKey[1]) {
+      const request = await fetch(`/api/resources/${queryKey[1]}`)
+      const body = await request.json() as GetResourceResponseDTO
+      return body
+    }
   }, {
     onSuccess(data) {
       setState(data)

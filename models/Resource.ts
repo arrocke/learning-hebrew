@@ -13,6 +13,7 @@ const ResourceSchema = new Mongoose.Schema({
   resourceType: String 
 })
 
-export default Mongoose.modelNames().includes('Resource')
-  ? Mongoose.model<ResourceDocument>('Resource')
-  : Mongoose.model<ResourceDocument>('Resource', ResourceSchema)
+if (Mongoose.modelNames().includes('Resource')) {
+  Mongoose.deleteModel('Resource')
+}
+export default Mongoose.model<ResourceDocument>('Resource', ResourceSchema)
