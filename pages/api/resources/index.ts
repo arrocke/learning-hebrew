@@ -15,7 +15,7 @@ export default async function(req: NextApiRequest, res: NextApiResponse) {
 
   switch (req.method) {
     case 'GET': {
-      const resources = await Resource.find() 
+      const resources = await Resource.find().sort({ _id: 1 })
       const dto: GetResourcesResponseDTO = resources.map(resource => ({
         id: resource._id.toHexString(),
         name: resource.name,

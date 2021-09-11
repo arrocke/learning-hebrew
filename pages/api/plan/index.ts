@@ -6,8 +6,6 @@ import Resource, { ResourceDocument } from "../../../models/Resource";
 import ResourceType from "../../../types/ResourceType";
 
 export type GetPlanResponseDTO = {
-  id: string
-  name: string
   resources: {
     id: string
     name: string,
@@ -21,10 +19,8 @@ export default async function(req: NextApiRequest, res: NextApiResponse) {
 
   switch (req.method) {
     case 'GET': {
-      const plan = await Plan.findById(req.query.id).populate('resources.resource')
+      const plan = await Plan.findOne().populate('resources.resource')
       const dto: GetPlanResponseDTO = {
-        id: plan._id.toHexString(),
-        name: plan.name,
         resources: plan.resources.map(({ resource }) => ({
           id: resource.id,
           name: resource.name,

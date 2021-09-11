@@ -1,18 +1,12 @@
-import { useRouter } from 'next/dist/client/router'
 import * as React from 'react'
-import { useMutation, useQuery } from 'react-query'
-import ResourceType from '../../../types/ResourceType'
-import { GetPlanResponseDTO } from '../../api/plans/[id]'
+import { useQuery } from 'react-query'
+import { GetPlanResponseDTO } from '../api/plan'
 
-export default function EditResourcePage() {
-  const router = useRouter()
-
-  const { status, data } = useQuery(['plan', router.query.id], async ({ queryKey }) => {
-    if (queryKey[1]) {
-      const request = await fetch(`/api/plans/${queryKey[1]}`)
-      const body = await request.json() as GetPlanResponseDTO
-      return body
-    }
+export default function PlanPage() {
+  const { status, data } = useQuery('plan', async ({ queryKey }) => {
+    const request = await fetch(`/api/plan`)
+    const body = await request.json() as GetPlanResponseDTO
+    return body
   })
 
   switch (status) {
@@ -23,7 +17,7 @@ export default function EditResourcePage() {
     case 'success': {
       return (
         <div>
-          <h1 className="text-xl font-bold mb-4">{data?.name}</h1>
+          <h1 className="text-xl font-bold mb-4">Plan</h1>
           <table>
             <thead>
               <tr>
