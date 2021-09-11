@@ -6,8 +6,10 @@ import ResourceType from "../../../types/ResourceType";
 export type GetResourceResponseDTO = {
   id: string
   name: string
-  url: string
-  resourceType: ResourceType
+  links: {
+    resourceType: ResourceType,
+    url: string
+  }[]
 }
 
 export default async function(req: NextApiRequest, res: NextApiResponse) {
@@ -19,8 +21,10 @@ export default async function(req: NextApiRequest, res: NextApiResponse) {
       const dto: GetResourceResponseDTO = {
         id: resource._id.toHexString(),
         name: resource.name,
-        url: resource.url,
-        resourceType: resource.resourceType
+        links: resource.links.map(link => ({
+          resourceType: link.resourceType,
+          url: link.url
+        }))
       }
       res.status(200).json(dto)
       break

@@ -23,8 +23,7 @@ export default function ResourcesPage() {
             <thead>
               <tr>
                 <th className="px-2 border">Name</th>
-                <th className="px-2 border">URL</th>
-                <th className="px-2 border">Resource Type</th>
+                <th className="px-2 border">Resource Types</th>
                 <th className="px-2 border"></th>
               </tr>
             </thead>
@@ -42,12 +41,7 @@ export default function ResourcesPage() {
                 (data ?? []).map(resource => (
                   <tr key={resource.id}>
                     <td className="px-2 border">{resource.name}</td>
-                    <td className="px-2 border">
-                      <a href={resource.url} target="_blank" className="text-blue-600 hover:underline focus:underline">
-                        {resource.url}
-                      </a>
-                    </td>
-                    <td className="px-2 border">{resource.resourceType}</td>
+                    <td className="px-2 border">{(resource.resourceTypes ?? []).join(', ')}</td>
                     <td className="px-2 border">
                       <Link href={`/resources/${resource.id}/edit`}>
                         <a className="text-blue-600 hover:underline focus:underline">Edit</a>
