@@ -21,12 +21,21 @@ export default async function(req: NextApiRequest, res: NextApiResponse) {
     case 'GET': {
       const plan = await Plan.findOne().populate('resources.resource')
       const dto: GetPlanResponseDTO = {
-        resources: plan.resources.map(({ resource }) => ({
-          id: resource.id,
-          name: resource.name,
-          url: resource.url,
-          resourceType: resource.resourceType
-        }))
+        resources: plan.resources
+          .map(r => {
+            const resource: ResourceDocument = r.resource as ResourceDocument
+            return {
+              resource,
+              link: resource.links.find(link => link.resourceType === r.resourceType)
+            }
+          })
+          .filter(({ link }) => !! link)
+          .map(({ link, resource }) => ({
+            id: resource._id,
+            name: resource.name,
+            url: link.url,
+            resourceType: link.resourceType
+          }))
       }
       res.status(200).json(dto)
       break

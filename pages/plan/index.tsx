@@ -23,16 +23,26 @@ export default function PlanPage() {
               <tr>
                 <th className="px-2 border"></th>
                 <th className="px-2 border">Resource</th>
+                <th className="px-2 border">Type</th>
               </tr>
             </thead>
             <tbody>
               {
-                (data?.resources ?? []).map(plan => (
-                  <tr key={plan.id}>
+                (data?.resources ?? []).map(resource => (
+                  <tr key={resource.id}>
                     <td className="px-2 border">
                       <input type="checkbox" />
                     </td>
-                    <td className="px-2 border">{plan.name}</td>
+                    <td className="px-2 border">
+                      <a
+                        href={resource.url}
+                        className="text-blue-600 hover:underline focus:underline"
+                        target="_blank"
+                      >
+                        {resource.name}
+                      </a>
+                    </td>
+                    <td className="px-2 border">{resource.resourceType}</td>
                   </tr>
                 ))
               }

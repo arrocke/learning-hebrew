@@ -1,10 +1,12 @@
 import * as Mongoose from "mongoose";
+import ResourceType from "../types/ResourceType";
 import { ResourceDocument } from "./Resource";
 
 export interface PlanDocument extends Mongoose.Document {
   name: string
   resources: {
-    resource: Mongoose.PopulatedDoc<ResourceDocument>
+    resource: Mongoose.PopulatedDoc<ResourceDocument, Mongoose.Types.ObjectId>,
+    resourceType: ResourceType
   }[]
 }
 
@@ -16,6 +18,7 @@ const PlanSchema = new Mongoose.Schema({
       type: Mongoose.Schema.Types.ObjectId,
       ref: 'Resource'
     },
+    resourceType: String
   }]
 })
 
