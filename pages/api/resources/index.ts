@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import dbConnect from "../../../dbConnect";
-import Resource from "../../../models/Resource";
+import { Resource } from "../../../models";
 import ResourceType from "../../../types/ResourceType";
 
 export type GetResourcesResponseDTO = {

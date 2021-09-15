@@ -1,8 +1,6 @@
-import * as Mongoose from "mongoose";
 import { NextApiRequest, NextApiResponse } from "next";
 import dbConnect from "../../../dbConnect";
-import Plan, { PlanDocument } from "../../../models/Plan";
-import Resource, { ResourceDocument } from "../../../models/Resource";
+import { Plan, ResourceDocument } from "../../../models";
 import ResourceType from "../../../types/ResourceType";
 
 export type GetPlanResponseDTO = {
