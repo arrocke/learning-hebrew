@@ -3,7 +3,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "seed:import": "bash seed/import.sh",
+    "seed:export": "bash seed/export.sh"
   },
   "dependencies": {
     "@types/react": "^17.0.20",
