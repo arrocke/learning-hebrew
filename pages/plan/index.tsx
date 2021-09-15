@@ -1,4 +1,5 @@
 import * as React from 'react'
+import Link from 'next/link'
 import { useQuery } from 'react-query'
 import { GetPlanResponseDTO } from '../api/plan'
 
@@ -18,6 +19,11 @@ export default function PlanPage() {
       return (
         <div>
           <h1 className="text-xl font-bold mb-4">Plan</h1>
+          <Link href={`/plan/edit`}>
+            <a className="text-blue-600 hover:underline focus:underline">
+              Edit
+            </a>
+          </Link>
           <table>
             <thead>
               <tr>
@@ -28,8 +34,8 @@ export default function PlanPage() {
             </thead>
             <tbody>
               {
-                (data?.resources ?? []).map(resource => (
-                  <tr key={resource.id}>
+                (data?.resources ?? []).map((resource, i) => (
+                  <tr key={i}>
                     <td className="px-2 border">
                       <input type="checkbox" />
                     </td>
